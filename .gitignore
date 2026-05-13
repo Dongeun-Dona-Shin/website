@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Generated files (regenerated from CV on build)
+src/generated/cv-data.json
+
+# Environment
+.env
+.env.local
+.env*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

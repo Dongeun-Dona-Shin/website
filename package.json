@@ -1,0 +1,23 @@
+{
+  "name": "academic-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate:cv": "python3 scripts/cv/parse_docx.py --input public/cv.docx --output src/generated/cv-data.json",
+    "dev": "npm run generate:cv && next dev",
+    "build": "npm run generate:cv && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.4.0"
+  }
+}
