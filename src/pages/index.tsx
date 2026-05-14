@@ -32,12 +32,25 @@ function CitationBlock({ entries }: { entries: string[] }) {
 }
 
 export default function Home() {
-  const { publications, work_in_progress, research_areas } = cvData;
+  const { publications, work_in_progress } = cvData;
 
-  // Flatten CV research_areas into individual keyword tags
-  const researchTags = research_areas.flatMap((item) =>
-    item.split(",").map((t) => t.trim()).filter((t) => t.length > 2)
-  );
+  const researchTags = [
+    "Comparative Politics",
+    "State-Society Relations",
+    "Politics of Death",
+    "Nationalism",
+    "State Funerals",
+    "National Cemeteries",
+    "Memory Politics",
+    "Gendered Politics",
+    "Structured Agency",
+    "Korean War Widows",
+    "Unification Issues",
+    "Migration and Citizenship",
+    "International Security",
+    "Critical IR Theories",
+    "Post-Colonial Politics in East Asia",
+  ];
 
   return (
     <>
