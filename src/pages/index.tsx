@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import { siteConfig } from "../content/site";
 import cvData from "../content/cvGenerated";
 
-const BIO = `여기에 자기소개 글을 써주세요. 연구 관심사, 현재 하고 있는 연구, 학문적 배경 등을 자유롭게 적으면 돼요.`;
+const BIO = `Dongeun Shin is a Senior Researcher at the Kangwon Institute for Unification Studies, Kangwon National University. She received her Ph.D. in Political Science from Yonsei University in 2025. Her research examines the politics of death, state memory, and national identity in South Korea — focusing on how state funerals, national cemeteries, and memorial practices construct and contest South Korean nationhood. She also works on gendered memory politics, migration, and the inter-Korean borderlands. Her current projects include manuscripts on war widows and gendered national mourning, war memory in the inter-Korean borderlands, and unmemorable deaths in the Jeju April 3rd Uprising.`;
 
 export default function Home() {
   const { meta, research_areas, publications, work_in_progress } = cvData;

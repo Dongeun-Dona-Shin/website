@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "Dongeun Shin",
-  title: "PhD Candidate",
-  institution: "Yonsei University",
-  department: "Department of Sociology",
-  email: "",
-  cvUrl: "/cv.pdf",
-  baseUrl: "https://donashin.github.io",
+  title: "Senior Researcher",
+  institution: "Kangwon National University",
+  department: "Kangwon Institute for Unification Studies",
+  email: "deshin@kangwona.ac.kr",
+  cvUrl: "/website/cv.pdf",
+  baseUrl: "https://dongeun-dona-shin.github.io/website",
 } as const;
