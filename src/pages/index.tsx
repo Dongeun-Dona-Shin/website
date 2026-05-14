@@ -7,22 +7,6 @@ import cvData from "../content/cvGenerated";
 
 const BIO = `Dongeun Shin is a Senior Researcher at the Kangwon Institute for Unification Studies, Kangwon National University. She received her Ph.D. in Political Science from Yonsei University in 2025. Her research examines the politics of death, state memory, and state-society relations in South Korea and beyond — focusing on how state funerals, national cemeteries, and memorial practices construct and contest being nations. She also works on gendered memory politics, migration, and the inter-Korean borderlands. Her current projects include manuscripts on war widows and gendered national mourning, war memory in the inter-Korean borderlands, and unmemorable deaths in the Jeju April 3rd Uprising.`;
 
-const RESEARCH_TAGS = [
-  "Comparative Politics",
-  "International Relations",
-  "Korean Studies",
-  "Politics of Death & Memory",
-  "State Funerals & National Cemeteries",
-  "Nationalism & National Identity",
-  "Gendered Memory Politics",
-  "State-Society Relations",
-  "Migration & Citizenship",
-  "Inter-Korean Borderlands",
-  "Memory Politics",
-  "Critical IR Theory",
-  "Korean War Memory",
-  "Unification Politics",
-];
 
 // Italicize journal names and add status badges
 function formatCitation(text: string): string {
@@ -48,12 +32,12 @@ function CitationBlock({ entries }: { entries: string[] }) {
 }
 
 export default function Home() {
-  const { publications, work_in_progress, teaching } = cvData;
+  const { publications, work_in_progress, research_areas } = cvData;
 
-  const teachingLines = teaching
-    .flatMap((t) => t.split("\n").map((l) => l.trim()).filter(Boolean))
-    .filter((l) => /^\w+(\.|\d{4}|Spring|Fall)/.test(l) || /\d{4}/.test(l.slice(0, 8)))
-    .slice(0, 8);
+  // Flatten CV research_areas into individual keyword tags
+  const researchTags = research_areas.flatMap((item) =>
+    item.split(",").map((t) => t.trim()).filter((t) => t.length > 2)
+  );
 
   return (
     <>
@@ -94,14 +78,16 @@ export default function Home() {
         <p className="bio-text">{BIO}</p>
 
         {/* ── Research Interests ── */}
-        <section>
-          <h2>Research Interests</h2>
-          <ul className="tag-list">
-            {RESEARCH_TAGS.map((t, i) => (
-              <li key={i}>{t}</li>
-            ))}
-          </ul>
-        </section>
+        {researchTags.length > 0 && (
+          <section>
+            <h2>Research Interests</h2>
+            <ul className="tag-list">
+              {researchTags.map((t, i) => (
+                <li key={i}>{t}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* ── Work in Progress ── */}
         <section>
