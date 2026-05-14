@@ -151,6 +151,44 @@ p { margin-bottom: 1rem; }
   border-radius: 4px;
 }
 
+/* Profile header */
+.profile-header {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.profile-photo img {
+  border-radius: 4px;
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.profile-info h1 {
+  margin-bottom: 0.2rem;
+}
+.profile-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.bio-text {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+@media (max-width: 560px) {
+  .profile-header {
+    flex-direction: column;
+  }
+}
+
 footer {
   border-top: 1px solid var(--color-border);
   padding: 1.5rem 0;

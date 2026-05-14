@@ -1,15 +1,16 @@
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import { siteConfig } from "../content/site";
 import cvData from "../content/cvGenerated";
 
+const BIO = `여기에 자기소개 글을 써주세요. 연구 관심사, 현재 하고 있는 연구, 학문적 배경 등을 자유롭게 적으면 돼요.`;
+
 export default function Home() {
-  const { meta, research_areas, publications, work_in_progress, employment } = cvData;
+  const { meta, research_areas, publications, work_in_progress } = cvData;
 
   const displayName = meta.name || siteConfig.name;
-  const displayAffiliation = meta.affiliation || `${siteConfig.department}, ${siteConfig.institution}`;
-  const currentPosition = employment[0] ?? null;
 
   return (
     <>
@@ -19,18 +20,35 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Layout>
-        {/* Bio */}
-        <h1>{displayName}</h1>
-        {currentPosition ? (
-          <p className="subtitle" style={{ whiteSpace: "pre-wrap" }}>{currentPosition}</p>
-        ) : (
-          <p className="subtitle">{displayAffiliation}</p>
-        )}
-        {meta.email && (
-          <p className="subtitle">
-            <a href={`mailto:${meta.email}`}>{meta.email}</a>
-          </p>
-        )}
+        {/* Photo + Bio header */}
+        <div className="profile-header">
+          <div className="profile-photo">
+            <Image
+              src="/website/shin_photo.jpg"
+              alt={displayName}
+              width={200}
+              height={240}
+              style={{ objectFit: "cover", borderRadius: "4px" }}
+            />
+          </div>
+          <div className="profile-info">
+            <h1>{displayName}</h1>
+            <p className="subtitle">{siteConfig.title}</p>
+            <p className="subtitle">{siteConfig.institution}</p>
+            {meta.email && (
+              <p className="subtitle">
+                <a href={`mailto:donashin@yonsei.ac.kr`}>donashin@yonsei.ac.kr</a>
+              </p>
+            )}
+            <div className="profile-links">
+              <a href={siteConfig.cvUrl} download className="btn btn-primary">Download CV (PDF)</a>
+              <Link href="/cv" className="btn btn-outline">View CV page</Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Bio paragraph */}
+        <p className="bio-text">{BIO}</p>
 
         {/* Research Areas */}
         {research_areas.length > 0 && (
@@ -43,20 +61,6 @@ export default function Home() {
             </ul>
           </section>
         )}
-
-        {/* Selected Publications */}
-        <section>
-          <h2>Publications</h2>
-          {publications.length > 0 ? (
-            <ul className="entry-list">
-              {publications.map((pub, i) => (
-                <li key={i}>{pub}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="empty-note">Publications will appear here after running <code>npm run generate:cv</code>.</p>
-          )}
-        </section>
 
         {/* Work in Progress */}
         <section>
@@ -72,9 +76,19 @@ export default function Home() {
           )}
         </section>
 
-        <p style={{ marginTop: "2rem" }}>
-          <Link href="/cv" className="btn btn-primary">View Full CV</Link>
-        </p>
+        {/* Publications */}
+        <section>
+          <h2>Publications</h2>
+          {publications.length > 0 ? (
+            <ul className="entry-list">
+              {publications.map((pub, i) => (
+                <li key={i}>{pub}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="empty-note">Publications will appear here after running <code>npm run generate:cv</code>.</p>
+          )}
+        </section>
       </Layout>
     </>
   );
