@@ -28,20 +28,13 @@ const RESEARCH_INTERESTS = [
     ],
   },
   {
-    area: "Korean Politics",
-    topics: [
-      "South Korean state formation and political development",
-      "Commemoration, mourning, and democratic memory",
-      "Civil society, social movements, and contentious politics",
-      "North Korean politics and unification issues",
-    ],
-  },
-  {
     area: "Korean Studies",
     topics: [
+      "South Korean state formation and political development",
       "Korean national identity and belonging",
       "The division system and its political consequences",
       "Korean War memory and its legacies",
+      "North Korean politics and unification issues",
       "Diaspora, migration, and transnational Korea",
     ],
   },
