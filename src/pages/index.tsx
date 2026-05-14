@@ -35,11 +35,11 @@ export default function Home() {
             <h1>{displayName}</h1>
             <p className="subtitle">{siteConfig.title}</p>
             <p className="subtitle">{siteConfig.institution}</p>
-            {meta.email && (
-              <p className="subtitle">
-                <a href={`mailto:donashin@yonsei.ac.kr`}>donashin@yonsei.ac.kr</a>
-              </p>
-            )}
+            <p className="subtitle">
+              <a href="mailto:deshin@kangwon.ac.kr">deshin@kangwon.ac.kr</a>
+              {" · "}
+              <a href="mailto:eunvvvv@gmail.com">eunvvvv@gmail.com</a>
+            </p>
             <div className="profile-links">
               <a href={siteConfig.cvUrl} download className="btn btn-primary">Download CV (PDF)</a>
               <Link href="/cv" className="btn btn-outline">View CV page</Link>
