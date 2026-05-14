@@ -9,25 +9,52 @@ const BIO = `Dongeun Shin is a Senior Researcher at the Kangwon Institute for Un
 
 const RESEARCH_INTERESTS = [
   {
-    area: "Politics of Death & Memory",
-    desc: "State funerals, national cemeteries, and memorial practices as sites where nationhood is constructed and contested.",
+    area: "Comparative Politics",
+    topics: [
+      "Politics of death, state funerals, and national cemeteries",
+      "State-society relations and contentious politics",
+      "Nationalism, national identity, and collective memory",
+      "Gendered politics and structured agency",
+      "Migration, citizenship, and social integration",
+    ],
   },
   {
-    area: "Nationalism & National Identity",
-    desc: "How states produce and perform national belonging through commemoration, mourning, and spatial politics.",
+    area: "International Relations",
+    topics: [
+      "Memory politics and international security",
+      "Critical IR theories",
+      "Inter-Korean relations and borderland studies",
+      "Post-colonial politics in East Asia",
+    ],
   },
   {
-    area: "Gendered Memory Politics",
-    desc: "War widows, gendered mourning, and structured agency in nationalist memorial culture.",
+    area: "Korean Politics",
+    topics: [
+      "South Korean state formation and political development",
+      "Commemoration, mourning, and democratic memory",
+      "Civil society, social movements, and contentious politics",
+      "North Korean politics and unification issues",
+    ],
   },
   {
-    area: "Migration & Citizenship",
-    desc: "Lived citizenship of married migrant women in South Korea; discrimination, language, and social integration.",
+    area: "Korean Studies",
+    topics: [
+      "Korean national identity and belonging",
+      "The division system and its political consequences",
+      "Korean War memory and its legacies",
+      "Diaspora, migration, and transnational Korea",
+    ],
   },
-  {
-    area: "Inter-Korean Relations & Borderlands",
-    desc: "War memory and spatial politics in the inter-Korean borderlands; paths to peace and reconciliation.",
-  },
+];
+
+const TEACHING_INTERESTS = [
+  "Comparative Politics",
+  "Korean Politics and Society",
+  "North Korean Politics and Unification Studies",
+  "Politics of Memory and Nationalism",
+  "International Relations Theory",
+  "Politics and Popular Culture",
+  "Research Methods in Political Science",
 ];
 
 // Italicize journal names and add status badges
@@ -102,27 +129,29 @@ export default function Home() {
         {/* ── Research Interests ── */}
         <section>
           <h2>Research Interests</h2>
-          <ul className="interest-list">
+          <div className="interest-grid">
             {RESEARCH_INTERESTS.map((r, i) => (
-              <li key={i}>
-                <strong>{r.area}</strong>
-                <span className="interest-desc">{r.desc}</span>
-              </li>
+              <div key={i} className="interest-card">
+                <h3 className="interest-area">{r.area}</h3>
+                <ul className="interest-topics">
+                  {r.topics.map((t, j) => (
+                    <li key={j}>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Teaching Interests ── */}
+        <section>
+          <h2>Teaching Interests</h2>
+          <ul className="tag-list">
+            {TEACHING_INTERESTS.map((t, i) => (
+              <li key={i}>{t}</li>
             ))}
           </ul>
         </section>
-
-        {/* ── Teaching ── */}
-        {teachingLines.length > 0 && (
-          <section>
-            <h2>Teaching</h2>
-            <ul className="entry-list">
-              {teachingLines.map((line, i) => (
-                <li key={i}>{line}</li>
-              ))}
-            </ul>
-          </section>
-        )}
 
         {/* ── Work in Progress ── */}
         <section>
