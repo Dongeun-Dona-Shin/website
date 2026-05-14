@@ -5,34 +5,83 @@ import Layout from "../components/Layout";
 import { siteConfig } from "../content/site";
 import cvData from "../content/cvGenerated";
 
-const BIO = `Dongeun Shin is a Senior Researcher at the Kangwon Institute for Unification Studies, Kangwon National University. She received her Ph.D. in Political Science from Yonsei University in 2025. Her research examines the politics of death, state memory, and national identity in South Korea — focusing on how state funerals, national cemeteries, and memorial practices construct and contest South Korean nationhood. She also works on gendered memory politics, migration, and the inter-Korean borderlands. Her current projects include manuscripts on war widows and gendered national mourning, war memory in the inter-Korean borderlands, and unmemorable deaths in the Jeju April 3rd Uprising.`;
+const BIO = `Dongeun Shin is a Senior Researcher at the Kangwon Institute for Unification Studies, Kangwon National University. She received her Ph.D. in Political Science from Yonsei University in 2025. Her research examines the politics of death, state memory, and state-society relations in South Korea and beyond — focusing on how state funerals, national cemeteries, and memorial practices construct and contest being nations. She also works on gendered memory politics, migration, and the inter-Korean borderlands. Her current projects include manuscripts on war widows and gendered national mourning, war memory in the inter-Korean borderlands, and unmemorable deaths in the Jeju April 3rd Uprising.`;
+
+const RESEARCH_INTERESTS = [
+  {
+    area: "Politics of Death & Memory",
+    desc: "State funerals, national cemeteries, and memorial practices as sites where nationhood is constructed and contested.",
+  },
+  {
+    area: "Nationalism & National Identity",
+    desc: "How states produce and perform national belonging through commemoration, mourning, and spatial politics.",
+  },
+  {
+    area: "Gendered Memory Politics",
+    desc: "War widows, gendered mourning, and structured agency in nationalist memorial culture.",
+  },
+  {
+    area: "Migration & Citizenship",
+    desc: "Lived citizenship of married migrant women in South Korea; discrimination, language, and social integration.",
+  },
+  {
+    area: "Inter-Korean Relations & Borderlands",
+    desc: "War memory and spatial politics in the inter-Korean borderlands; paths to peace and reconciliation.",
+  },
+];
+
+// Italicize journal names and add status badges
+function formatCitation(text: string): string {
+  let s = text
+    // journal name appears after closing quote, before volume/issue number
+    .replace(/\."\s+([A-Za-zÀ-ÿ][^"<\n]+?)([,\.]\s*\d)/g, '." <em>$1</em>$2')
+    // under review badge
+    .replace(/[Uu]nder\s+[Rr]eview/g, '<span class="badge badge-review">Under Review</span>')
+    // in preparation badge
+    .replace(/[Ii]n\s+[Pp]reparation/g, '<span class="badge badge-prep">In Preparation</span>');
+  return s;
+}
+
+function CitationBlock({ entries }: { entries: string[] }) {
+  const all = entries.flatMap((e) => e.split("\n").map((l) => l.trim()).filter(Boolean));
+  return (
+    <ul className="entry-list">
+      {all.map((line, i) => (
+        <li key={i} dangerouslySetInnerHTML={{ __html: formatCitation(line) }} />
+      ))}
+    </ul>
+  );
+}
 
 export default function Home() {
-  const { meta, research_areas, publications, work_in_progress } = cvData;
+  const { publications, work_in_progress, teaching } = cvData;
 
-  const displayName = meta.name || siteConfig.name;
+  const teachingLines = teaching
+    .flatMap((t) => t.split("\n").map((l) => l.trim()).filter(Boolean))
+    .filter((l) => /^\w+(\.|\d{4}|Spring|Fall)/.test(l) || /\d{4}/.test(l.slice(0, 8)))
+    .slice(0, 8);
 
   return (
     <>
       <Head>
-        <title>{displayName}</title>
-        <meta name="description" content={`Academic website of ${displayName}`} />
+        <title>{siteConfig.name}</title>
+        <meta name="description" content={`Academic website of ${siteConfig.name}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Layout>
-        {/* Photo + Bio header */}
+        {/* ── Profile header ── */}
         <div className="profile-header">
           <div className="profile-photo">
             <Image
               src="/website/shin_photo.jpg"
-              alt={displayName}
-              width={200}
-              height={240}
-              style={{ objectFit: "cover", borderRadius: "4px" }}
+              alt={siteConfig.name}
+              width={190}
+              height={230}
+              style={{ objectFit: "cover", borderRadius: "6px" }}
             />
           </div>
           <div className="profile-info">
-            <h1>{displayName}</h1>
+            <h1>{siteConfig.name}</h1>
             <p className="subtitle">{siteConfig.title}</p>
             <p className="subtitle">{siteConfig.institution}</p>
             <p className="subtitle">
@@ -47,46 +96,51 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Bio paragraph */}
+        {/* ── Bio ── */}
         <p className="bio-text">{BIO}</p>
 
-        {/* Research Areas */}
-        {research_areas.length > 0 && (
+        {/* ── Research Interests ── */}
+        <section>
+          <h2>Research Interests</h2>
+          <ul className="interest-list">
+            {RESEARCH_INTERESTS.map((r, i) => (
+              <li key={i}>
+                <strong>{r.area}</strong>
+                <span className="interest-desc">{r.desc}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* ── Teaching ── */}
+        {teachingLines.length > 0 && (
           <section>
-            <h2>Research Areas</h2>
-            <ul className="tag-list">
-              {research_areas.map((area, i) => (
-                <li key={i}>{area}</li>
+            <h2>Teaching</h2>
+            <ul className="entry-list">
+              {teachingLines.map((line, i) => (
+                <li key={i}>{line}</li>
               ))}
             </ul>
           </section>
         )}
 
-        {/* Work in Progress */}
+        {/* ── Work in Progress ── */}
         <section>
           <h2>Work in Progress</h2>
           {work_in_progress.length > 0 ? (
-            <ul className="entry-list">
-              {work_in_progress.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
+            <CitationBlock entries={work_in_progress} />
           ) : (
-            <p className="empty-note">Work in progress will appear here after running <code>npm run generate:cv</code>.</p>
+            <p className="empty-note">Will appear after running <code>npm run generate:cv</code>.</p>
           )}
         </section>
 
-        {/* Publications */}
+        {/* ── Publications ── */}
         <section>
           <h2>Publications</h2>
           {publications.length > 0 ? (
-            <ul className="entry-list">
-              {publications.map((pub, i) => (
-                <li key={i}>{pub}</li>
-              ))}
-            </ul>
+            <CitationBlock entries={publications} />
           ) : (
-            <p className="empty-note">Publications will appear here after running <code>npm run generate:cv</code>.</p>
+            <p className="empty-note">Will appear after running <code>npm run generate:cv</code>.</p>
           )}
         </section>
       </Layout>
