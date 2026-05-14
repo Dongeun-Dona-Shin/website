@@ -7,47 +7,21 @@ import cvData from "../content/cvGenerated";
 
 const BIO = `Dongeun Shin is a Senior Researcher at the Kangwon Institute for Unification Studies, Kangwon National University. She received her Ph.D. in Political Science from Yonsei University in 2025. Her research examines the politics of death, state memory, and state-society relations in South Korea and beyond — focusing on how state funerals, national cemeteries, and memorial practices construct and contest being nations. She also works on gendered memory politics, migration, and the inter-Korean borderlands. Her current projects include manuscripts on war widows and gendered national mourning, war memory in the inter-Korean borderlands, and unmemorable deaths in the Jeju April 3rd Uprising.`;
 
-const RESEARCH_INTERESTS = [
-  {
-    area: "Comparative Politics",
-    topics: [
-      "Politics of death, state funerals, and national cemeteries",
-      "State-society relations and contentious politics",
-      "Nationalism, national identity, and collective memory",
-      "Gendered politics and structured agency",
-      "Migration, citizenship, and social integration",
-    ],
-  },
-  {
-    area: "International Relations",
-    topics: [
-      "Memory politics and international security",
-      "Critical IR theories",
-      "Inter-Korean relations and borderland studies",
-      "Post-colonial politics in East Asia",
-    ],
-  },
-  {
-    area: "Korean Studies",
-    topics: [
-      "South Korean state formation and political development",
-      "Korean national identity and belonging",
-      "The division system and its political consequences",
-      "Korean War memory and its legacies",
-      "North Korean politics and unification issues",
-      "Diaspora, migration, and transnational Korea",
-    ],
-  },
-];
-
-const TEACHING_INTERESTS = [
+const RESEARCH_TAGS = [
   "Comparative Politics",
-  "Korean Politics and Society",
-  "North Korean Politics and Unification Studies",
-  "Politics of Memory and Nationalism",
-  "International Relations Theory",
-  "Politics and Popular Culture",
-  "Research Methods in Political Science",
+  "International Relations",
+  "Korean Studies",
+  "Politics of Death & Memory",
+  "State Funerals & National Cemeteries",
+  "Nationalism & National Identity",
+  "Gendered Memory Politics",
+  "State-Society Relations",
+  "Migration & Citizenship",
+  "Inter-Korean Borderlands",
+  "Memory Politics",
+  "Critical IR Theory",
+  "Korean War Memory",
+  "Unification Politics",
 ];
 
 // Italicize journal names and add status badges
@@ -122,25 +96,8 @@ export default function Home() {
         {/* ── Research Interests ── */}
         <section>
           <h2>Research Interests</h2>
-          <div className="interest-grid">
-            {RESEARCH_INTERESTS.map((r, i) => (
-              <div key={i} className="interest-card">
-                <h3 className="interest-area">{r.area}</h3>
-                <ul className="interest-topics">
-                  {r.topics.map((t, j) => (
-                    <li key={j}>{t}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Teaching Interests ── */}
-        <section>
-          <h2>Teaching Interests</h2>
           <ul className="tag-list">
-            {TEACHING_INTERESTS.map((t, i) => (
+            {RESEARCH_TAGS.map((t, i) => (
               <li key={i}>{t}</li>
             ))}
           </ul>
